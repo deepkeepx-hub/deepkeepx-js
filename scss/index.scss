@@ -1,0 +1,105 @@
+:root {
+	/* 状态色 */
+	--dkx-warning-color: #e6a23c;
+	--dkx-success-color: #67c23a;
+	--dkx-danger-color: #f56c6c;
+	--dkx-info-color: #909399;
+	/* 文字 */
+	--dkx-text-primary: #303133;        /* 主要文字：标题、重要信息 */
+	--dkx-text-regular: #606266;        /* 常规文字：正文、段落 */
+	--dkx-text-secondary: #909399;      /* 次要文字：辅助说明、占位符 */
+}
+
+:root.dark {
+	/* 状态色 */
+	--dkx-warning-color: #eebe77;
+	--dkx-success-color: #85ce61;
+	--dkx-danger-color: #f78989;
+	--dkx-info-color: #a6a9ad;
+	/* 文字 */
+	--dkx-text-primary: rgba(255, 255, 255, 0.9); /* 主要文字：不要用纯白 #fff，用 0.9 透明度更柔和 */
+	--dkx-text-regular: rgba(255, 255, 255, 0.7); /* 常规文字 */
+	--dkx-text-secondary: rgba(255, 255, 255, 0.5); /* 次要文字 */
+}
+
+/* 关闭默认的淡入淡出，避免干扰 */
+::view-transition-old(root),
+::view-transition-new(root) {
+	animation: none;
+	mix-blend-mode: normal;
+}
+
+/* --- 切换到深色模式：新视图（深色）从点击处扩展 --- */
+html.to-dark::view-transition-old(root) {
+	z-index: 1;
+	animation: none;
+}
+
+html.to-dark::view-transition-new(root) {
+	z-index: 9999;
+	animation: clip-expand 0.5s ease-in forwards;
+}
+
+/* --- 切换到浅色模式：旧视图（深色）向点击处收回 --- */
+html.to-light::view-transition-old(root) {
+	z-index: 9999;
+	animation: clip-contract 0.5s ease-in forwards;
+}
+
+html.to-light::view-transition-new(root) {
+	z-index: 1;
+	animation: none;
+}
+
+/* 扩展关键帧（0% -> 150%） */
+@keyframes clip-expand {
+	from { clip-path: circle(0% at var(--x) var(--y)); }
+	to { clip-path: circle(150% at var(--x) var(--y)); }
+}
+
+/* 收回关键帧（150% -> 0%） */
+@keyframes clip-contract {
+	from { clip-path: circle(150% at var(--x) var(--y)); }
+	to { clip-path: circle(0% at var(--x) var(--y)); }
+}
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+	-webkit-text-size-adjust: 100%;
+}
+
+body.gray{
+	-webkit-filter: grayscale(100%);
+	-moz-filter: grayscale(100%);
+	-ms-filter: grayscale(100%);
+	-o-filter: grayscale(100%);
+	filter: grayscale(100%);
+}
+
+img {
+	display: block;
+}
+
+a {
+	text-decoration: none;
+}
+
+@import "./mixin/display.scss";
+@import "./mixin/grid.scss";
+@import "./mixin/position.scss";
+@import "./mixin/size.scss";
+@import "./mixin/text-ellipsis.scss";
+
+@import "./components/toast.scss";
+@import "./components/loading.scss";

@@ -1,0 +1,62 @@
+/* Loading 遮罩层容器 - 毛玻璃效果 */
+.dkx-loading-mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    // 核心毛玻璃配置
+    background-color: rgba(255, 255, 255, 0.4); // 降低不透明度，让背景透出来
+    backdrop-filter: blur(8px);                 // 增加模糊半径，效果更明显
+    -webkit-backdrop-filter: blur(8px);         // Safari 兼容
+    
+    z-index: 999999;
+    @include flex-center-center-column;
+    
+    // 可选：添加一个极淡的渐变，增加层次感
+    background-image: linear-gradient(
+        135deg, 
+        rgba(255, 255, 255, 0.4) 0%, 
+        rgba(255, 255, 255, 0.1) 100%
+    );
+}
+
+/* Loading 内容盒子 - 保持白色实心，确保文字清晰 */
+.dkx-loading-box {
+    background: #ffffff;
+    padding: 20px 30px;
+    border-radius: 12px; // 稍微加大圆角，更现代
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); // 加深阴影，增强悬浮感
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 120px;
+    
+    // 可选：给盒子也加一点点透明度和边框，使其更像玻璃卡片
+    // border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* 旋转图标 */
+.dkx-loading-spinner {
+	@include size(32px);
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--dkx-primary-color, #409eff);
+    border-radius: 50%;
+    animation: dkx-spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+/* 加载文字 */
+.dkx-loading-text {
+    font-size: 14px;
+    color: #606266;
+    text-align: center;
+    font-weight: 500; // 稍微加粗，在模糊背景下更易读
+}
+
+/* 旋转动画关键帧 */
+@keyframes dkx-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}

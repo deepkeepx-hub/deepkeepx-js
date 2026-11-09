@@ -1,0 +1,84 @@
+{
+	"name": "deepkeepx-js",
+	"version": "1.0.0",
+	"description": "DeepkeepX 前端 JS 工具库 —— 轻量 · 零依赖 · 开箱即用（toast / loading / request / download / cookie / copy / validate / theme / tilt / browser fingerprint）",
+	"keywords": [
+		"deepkeepx",
+		"javascript",
+		"frontend",
+		"library",
+		"toolkit",
+		"utils",
+		"ui",
+		"toast",
+		"loading",
+		"request",
+		"ajax",
+		"download",
+		"cookie",
+		"copy",
+		"validate",
+		"dark-mode",
+		"tilt",
+		"3d-tilt",
+		"fingerprint",
+		"browser-detection",
+		"umd",
+		"zero-dependency"
+	],
+	"license": "MIT",
+	"author": {
+		"name": "DeepkeepX",
+		"email": "deepkeepx@gmail.com",
+		"url": "https://github.com/deepkeepx"
+	},
+	"type": "commonjs",
+	"main": "dist/index.min.js",
+	"module": "dist/index.esm.mjs",
+	"unpkg": "dist/index.min.js",
+	"jsdelivr": "dist/index.min.js",
+	"exports": {
+		".": {
+			"import": "./dist/index.esm.mjs",
+			"require": "./dist/index.min.js",
+			"default": "./dist/index.min.js"
+		},
+		"./dist/*": "./dist/*",
+		"./package.json": "./package.json"
+	},
+	"sideEffects": [
+		"**/*.css"
+	],
+	"files": [
+		"dist"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"scripts": {
+		"dev": "node build/watch.js",
+		"build": "node build/watch.js --once",
+		"build:lib": "node build/watch.js --once --no-obfuscate",
+		"deploy:pre": "npm run build && node build/deploy.js",
+		"deploy:pro": "npm run build:lib && node build/stage.js && npm publish ./dist-publish"
+	},
+	"engines": {
+		"node": ">=16.0.0"
+	},
+	"devDependencies": {
+		"chokidar": "^5.0.0",
+		"dotenv": "^18.0.8",
+		"esbuild": "^0.28.2",
+		"javascript-obfuscator": "^5.9.0",
+		"ssh2-sftp-client": "^12.1.1",
+		"terser": "^5.51.2"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/deepkeepx-hub/deepkeepx-js.git"
+	},
+	"bugs": {
+		"url": "https://github.com/deepkeepx-hub/deepkeepx-js/issues"
+	},
+	"homepage": "https://github.com/deepkeepx-hub/deepkeepx-js#readme"
+}

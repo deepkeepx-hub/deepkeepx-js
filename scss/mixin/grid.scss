@@ -1,0 +1,6 @@
+
+@mixin grid($clamp) {
+	display: grid;
+	grid-template-columns: repeat($clamp, 1fr);
+	gap: var(--dk-gap);
+}
